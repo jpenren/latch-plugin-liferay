@@ -1,5 +1,4 @@
 #Liferay Latch plugin
-====================
 
 With latch liferay plugin you can add a new security level to your Liferay instances. Latch is a delegation security system that let to your users configure your own security mechanism and use their mobile phone as second factor security.
 
