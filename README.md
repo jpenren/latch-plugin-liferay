@@ -20,7 +20,6 @@ Latch plugin supports all security mode available in Latch service. These securi
 Soon the first version will be released.
 
 To install the plugin, you only needs to copy the .war package into the Liferay deploy directory.
-
 To configure the plugin you need to add the Latch Portlet to any page and access to the portlet configuration (engine icon) where you can specify the required parameters to integrate your portal with Latch.
 
 Your portal is ready!
