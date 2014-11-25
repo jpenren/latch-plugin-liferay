@@ -1,0 +1,1 @@
+create unique index IX_741AAA45 on EP_UserLatch (userId);
