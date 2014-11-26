@@ -30,8 +30,8 @@ final class UserLatchRepository {
 	
 	public boolean hasLatch(long userId) throws SQLException{
 		final QueryRunner run = createRunner();
-		final ScalarHandler<Long> handler = new ScalarHandler<Long>();
-		return run.query(COUNT, handler, userId)>0;
+		final ScalarHandler<Number> handler = new ScalarHandler<Number>();
+		return run.query(COUNT, handler, userId).intValue()>0;
 	}
 	
 	public void save(UserLatch userLatch) throws SQLException{

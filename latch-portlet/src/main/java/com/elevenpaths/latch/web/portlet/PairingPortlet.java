@@ -27,18 +27,18 @@ public class PairingPortlet extends MVCPortlet {
 	private String pairTemplate;
 	private String unPairTemplate;
 	private String errorTemplate;
-	private String anonymousTemplate;
+	private String guestTemplate;
 	
 	public void init() throws PortletException {
 		super.init();
 		pairTemplate = getInitParameter("pair-template");
 		unPairTemplate = getInitParameter("unpair-template");
 		errorTemplate = getInitParameter("error-template");
-		anonymousTemplate = getInitParameter("guest-template");
+		guestTemplate = getInitParameter("guest-template");
 	}
 	
 	public void doView(RenderRequest request, RenderResponse response) throws IOException, PortletException {
-		String view = anonymousTemplate;
+		String view = guestTemplate;
 		try {
 			User user = PortalUtil.getUser(request);
 			if(user!=null){

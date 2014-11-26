@@ -1,15 +1,21 @@
 package com.elevenpaths.latch.api;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
+import java.security.KeyStore;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.SSLContext;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
@@ -18,6 +24,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -131,8 +139,10 @@ public final class Latch {
      */
     private String doGet(String query) throws CommunicationException{
     	final String url = concat(baseUrl, query);
-    	final CloseableHttpClient connection = HttpClients.createDefault();
+    	
+    	CloseableHttpClient connection = null;
     	try {
+    		connection = initializeConnection();
     		final HttpGet method = new HttpGet(url);
     		addHeaders(method, query);
     		
@@ -163,11 +173,37 @@ public final class Latch {
 			throw new CommunicationException("Latch API communication error: ", e);
 		}finally{
 			try {
-				connection.close();
+				if(connection!=null){
+					connection.close();
+				}
 			} catch (Exception e2) {
 				log.error("Error closing connection: ", e2);
 			}
 		}
+    }
+    
+    /**
+     * Initializes SSL connection
+     * @return
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
+    private CloseableHttpClient initializeConnection() throws GeneralSecurityException, IOException{
+    	//Generates a keystore with Latch SSL CA 
+    	CertificateFactory cf = CertificateFactory.getInstance("X.509");
+		final InputStream in = Latch.class.getResourceAsStream("/ca.pem");
+		Certificate ca = cf.generateCertificate(in);
+		 
+		KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+		keyStore.load(null, null);
+		keyStore.setCertificateEntry("ca", ca);
+        
+        //SSL context with custom keystore
+    	final SSLContext sslcontext = SSLContexts.custom().loadTrustMaterial(keyStore).build();
+        final SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext);
+        
+        //Initialize and configure connection
+    	return HttpClients.custom().setSSLSocketFactory(sslsf).build();
     }
     
     /**
