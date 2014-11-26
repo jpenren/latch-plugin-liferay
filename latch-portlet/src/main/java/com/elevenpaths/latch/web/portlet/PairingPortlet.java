@@ -11,8 +11,8 @@ import javax.portlet.RenderResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.elevenpaths.latch.api.exception.CommunicationException;
 import com.elevenpaths.latch.auth.LatchService;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.User;
@@ -60,11 +60,9 @@ public class PairingPortlet extends MVCPortlet {
 			long userId = PortalUtil.getUser(request).getUserId();
 			//Calling to Latch and retrieving response
 			LatchService.doPair(userId, token);
-		} catch (CommunicationException e) {
-			//TODO add info about error
-			SessionMessages.add(request, "error");
+			SessionMessages.add(request, "success");
 		} catch (Exception e) {
-			SessionMessages.add(request, "error");
+			SessionErrors.add(request, "error");
 		} 
 	}
 	

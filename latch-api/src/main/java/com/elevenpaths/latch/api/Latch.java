@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.elevenpaths.latch.api.exception.CommunicationException;
+import com.elevenpaths.latch.api.exception.InitalizeCommunicationException;
 import com.elevenpaths.latch.api.exception.MethodException;
 import com.elevenpaths.latch.api.response.PairResponse;
 import com.elevenpaths.latch.api.response.ResponseBuilder;
@@ -60,6 +61,7 @@ public final class Latch {
     private static final String ALGORITHM = "HmacSHA1";
     private static final String ENCODING = "ISO-8859-1";
     private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
+    private static SSLConnectionSocketFactory socketFactory;
     private String baseUrl = DEFAULT_BASE_URL;
     private String version = DEFAULT_VERSION;
 	private String appId;
@@ -139,10 +141,8 @@ public final class Latch {
      */
     private String doGet(String query) throws CommunicationException{
     	final String url = concat(baseUrl, query);
-    	
-    	CloseableHttpClient connection = null;
+    	final CloseableHttpClient connection = initializeConnection();
     	try {
-    		connection = initializeConnection();
     		final HttpGet method = new HttpGet(url);
     		addHeaders(method, query);
     		
@@ -188,22 +188,29 @@ public final class Latch {
      * @throws GeneralSecurityException
      * @throws IOException
      */
-    private CloseableHttpClient initializeConnection() throws GeneralSecurityException, IOException{
-    	//Generates a keystore with Latch SSL CA 
-    	CertificateFactory cf = CertificateFactory.getInstance("X.509");
-		final InputStream in = Latch.class.getResourceAsStream("/elevenpaths.crt");
-		Certificate ca = cf.generateCertificate(in);
-		 
-		KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
-		keyStore.load(null, null);
-		keyStore.setCertificateEntry("ca", ca);
-        
-        //SSL context with custom keystore
-    	final SSLContext sslcontext = SSLContexts.custom().loadTrustMaterial(keyStore).build();
-        final SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext);
-        
-        //Initialize and configure connection
-    	return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+    private CloseableHttpClient initializeConnection() throws InitalizeCommunicationException{
+    	try {
+    		if(socketFactory==null){
+    	    	//Generates a keystore with Latch SSL CA 
+    	    	final CertificateFactory cf = CertificateFactory.getInstance("X.509");
+    			final InputStream in = Latch.class.getResourceAsStream("/StartComCA.cer");
+    			final Certificate ca = cf.generateCertificate(in);
+    			 
+    			final KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+    			keyStore.load(null, null);
+    			keyStore.setCertificateEntry("ca", ca);
+    	        
+    	        //SSL context with custom keystore
+    	    	final SSLContext sslcontext = SSLContexts.custom().loadTrustMaterial(keyStore).build();
+    	    	socketFactory = new SSLConnectionSocketFactory(sslcontext);
+        	}
+            
+            //Initialize and configure connection
+        	return HttpClients.custom().setSSLSocketFactory(socketFactory).build();
+		} catch (Exception e) {
+			log.error("Error initializing connection: ", e);
+			throw new InitalizeCommunicationException("Error initializing connection: ", e);
+		}
     }
     
     /**
