@@ -1,6 +1,6 @@
 #Liferay Latch plugin
 
-With latch liferay plugin you can add a new security level to your Liferay instances. Latch is a delegation security system that let to your users configure your own security mechanism and use their mobile phone as second factor security.
+With latch liferay plugin you can add a new security layer to your Liferay instances. Latch is a delegation security system that let to your users configure your own security mechanism and use their mobile phone as second factor security.
 
 Latch plugin is simple to configure and use, is not intrusive, only adds a new security layer without any modifying in your base installation, it can be disabled or removed without any problem.
 
@@ -12,8 +12,8 @@ Latch plugin supports all security mode available in Latch service. These securi
 - **One time password**. The user will receive a second password in their mobile to validate the access to the portal.
 
 ##Prerequisites
-- Liferay 6.2 (6.1 in test)
-- Latch developer account. To configure the plugin do you needs to create an application in Latch developer area to get an account id and secret key. In the application configuration also you can configure if the OTP (one time password) is available to your users.
+- Liferay 6.2 (testing 6.1)
+- Latch developer account. To configure the plugin do you needs to create an application in Latch developer area to get an application id and secret key. Also, in the application configuration page, you can configure if the OTP (one time password) is available.
 
 ##Installing and configuring Latch plugin
 Soon the first version will be released.
