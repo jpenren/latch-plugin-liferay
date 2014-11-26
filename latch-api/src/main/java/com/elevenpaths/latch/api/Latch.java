@@ -191,7 +191,7 @@ public final class Latch {
     private CloseableHttpClient initializeConnection() throws GeneralSecurityException, IOException{
     	//Generates a keystore with Latch SSL CA 
     	CertificateFactory cf = CertificateFactory.getInstance("X.509");
-		final InputStream in = Latch.class.getResourceAsStream("/ca.pem");
+		final InputStream in = Latch.class.getResourceAsStream("/elevenpaths.crt");
 		Certificate ca = cf.generateCertificate(in);
 		 
 		KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
