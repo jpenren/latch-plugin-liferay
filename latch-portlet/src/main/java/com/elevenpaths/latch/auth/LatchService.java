@@ -3,9 +3,6 @@ package com.elevenpaths.latch.auth;
 import java.sql.SQLException;
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.elevenpaths.latch.LatchConfig;
 import com.elevenpaths.latch.api.Latch;
 import com.elevenpaths.latch.api.exception.CommunicationException;
@@ -15,9 +12,11 @@ import com.elevenpaths.latch.api.response.StatusResponse;
 import com.elevenpaths.latch.domain.UserLatch;
 import com.elevenpaths.latch.exception.LatchAuthenticationException;
 import com.elevenpaths.latch.exception.UserNotLatchedException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 public class LatchService {
-	private static Logger log = LoggerFactory.getLogger(LatchService.class);
+	private static Log log = LogFactoryUtil.getLog(LatchService.class);
 	private static UserLatchRepository repo = new UserLatchRepository();
 	
 	public static UserLatch create(){
@@ -82,13 +81,16 @@ public class LatchService {
 				//Calling to Latch to unpair account
 				String appId = LatchConfig.getAppId();
 				String secretKey = LatchConfig.getSecretKey();
-				Latch.with(appId, secretKey).unpair(userLatch.getAccountId());
+				try {
+					Latch.with(appId, secretKey).unpair(userLatch.getAccountId());
+				} catch (Exception e) {
+					log.error("Error accesing database: ", e);
+				}
+				
 				repo.delete(userId);
 			}
 		} catch (SQLException e) {
 			throw handleException("DataBase error: ", e);
-		} catch (MethodException e) {
-			throw handleException("API method error: ", e);
 		}
 	}
 	

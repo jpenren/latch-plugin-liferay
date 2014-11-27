@@ -173,9 +173,7 @@ public final class Latch {
 			throw new CommunicationException("Latch API communication error: ", e);
 		}finally{
 			try {
-				if(connection!=null){
-					connection.close();
-				}
+				connection.close();
 			} catch (Exception e2) {
 				log.error("Error closing connection: ", e2);
 			}

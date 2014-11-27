@@ -3,20 +3,19 @@ package com.elevenpaths.latch.auth;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.elevenpaths.latch.LatchConfig;
 import com.elevenpaths.latch.api.exception.CommunicationException;
 import com.elevenpaths.latch.api.response.StatusResponse;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 public class LatchAuthenticator implements Authenticator {
-	private final Logger log = LoggerFactory.getLogger(LatchAuthenticator.class);
+	private static Log log = LogFactoryUtil.getLog(LatchAuthenticator.class);
 	private static Map<Long, String> usersSecondFactor = new ConcurrentHashMap<Long, String>();
 	
 	public int authenticateByEmailAddress(long companyId, String emailAddress,
