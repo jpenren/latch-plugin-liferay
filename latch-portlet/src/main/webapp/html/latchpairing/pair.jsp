@@ -5,8 +5,16 @@
 <portlet:actionURL var="doPairUrl" name="doPair"></portlet:actionURL>
 
 <aui:form action="<%= doPairUrl %>" name="<portlet:namespace/>fm" cssClass="form-inline pairing-form">
-	<div class="pairing-form__content">
-		<input class="field pairing-form__content__token" name="<portlet:namespace/>token-value" maxlength="6" />
-	    <aui:button type="submit" value="latch.button.pair"></aui:button>
+	<p><liferay-ui:message key="latch.pairing.info" /></p>
+	<div class="row pairing-form__content">
+		<div class="span6 text-center">
+			<img src="<%= request.getContextPath() %>/img/LatchCode.png" align="middle" />
+		</div>
+		<div class="span6 pairing-form__content_fields">
+			<div>
+				<input class="field pairing-form__content__fields__token" name="<portlet:namespace/>token-value" maxlength="6" placeholder="Your code" />
+	    		<aui:button type="submit" cssClass="pairing-form__content__fields__send" value="latch.button.pair"></aui:button>
+			</div>
+	    </div>
 	</div>
 </aui:form>

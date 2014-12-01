@@ -1,0 +1,12 @@
+
+
+.pairing-form__content_fields{
+	margin-top: 8em;
+}
+	.pairing-form__content_fields .pairing-form__content__fields__token{
+		width: 10em;
+	}
+	.pairing-form__content_fields .pairing-form__content__fields__send{
+		display: block;
+		margin-top: 1em;
+	}
