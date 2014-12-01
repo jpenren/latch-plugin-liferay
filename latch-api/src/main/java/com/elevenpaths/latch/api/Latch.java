@@ -193,7 +193,7 @@ public final class Latch {
     		if(socketFactory==null){
     	    	//Generates a keystore with Latch SSL CA 
     	    	final CertificateFactory cf = CertificateFactory.getInstance("X.509");
-    			final InputStream in = Latch.class.getResourceAsStream("/StartComCA.cer");
+    			final InputStream in = Latch.class.getResourceAsStream("/LatchCA.cer");
     			final Certificate ca = cf.generateCertificate(in);
     			 
     			final KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
