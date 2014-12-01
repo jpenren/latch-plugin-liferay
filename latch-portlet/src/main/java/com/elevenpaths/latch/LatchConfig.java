@@ -1,18 +1,21 @@
 package com.elevenpaths.latch;
 
+import static com.elevenpaths.latch.LatchKeys.APP_ID;
+import static com.elevenpaths.latch.LatchKeys.FORCE_LOGIN_FAIL;
+import static com.elevenpaths.latch.LatchKeys.SECRET_KEY;
+
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import static com.elevenpaths.latch.LatchKeys.*;
 
 
 public final class LatchConfig {
 	private static final String CONFIG_FILE = "latch-config.properties";
-	private static Logger log  = LoggerFactory.getLogger(LatchConfig.class);
+	private static Log log = LogFactoryUtil.getLog(LatchConfig.class);
 	private static PropertiesConfiguration config = new PropertiesConfiguration();
 	
 	static {

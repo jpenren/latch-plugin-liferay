@@ -12,15 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.elevenpaths.latch.LatchKeys;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 
 public class LatchFilter implements Filter {
-	private final Logger log = LoggerFactory.getLogger(LatchFilter.class);
+	private static Log log = LogFactoryUtil.getLog(LatchFilter.class);
 	private String secondFactorUrl;
 
 	public void init(FilterConfig config) throws ServletException {

@@ -8,10 +8,9 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.elevenpaths.latch.auth.LatchService;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -23,7 +22,7 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class LatchPairingPortlet
  */
 public class PairingPortlet extends MVCPortlet {
-	private final Logger log = LoggerFactory.getLogger(PairingPortlet.class);
+	private static Log log = LogFactoryUtil.getLog(PairingPortlet.class);
 	private String pairTemplate;
 	private String unPairTemplate;
 	private String errorTemplate;
