@@ -24,9 +24,8 @@ Latch plugin supports all security mode available in Latch service. These securi
 - Latch developer account. To configure the plugin do you needs to create an application in [Latch developer area](https://latch.elevenpaths.com/www/) to get an application id and secret key. Also, in the application configuration page, you can configure if the OTP (one time password) is available.
 
 ##Installing and configuring Latch plugin
-Soon the first version will be released.
 
-To install the plugin, you only needs to copy the .war package into the Liferay deploy directory.
+To install the plugin, you only need to copy the .war package (downloaded from release tab) into the Liferay deploy directory.
 To configure the plugin you need to add the Latch Portlet to any page and access to the portlet configuration (engine icon) where you can specify the required parameters to integrate your portal with Latch.
 
 <a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Configuration.png">
