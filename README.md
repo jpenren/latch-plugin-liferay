@@ -42,8 +42,8 @@ Your portal is ready!
 After that, if an account is managed by Latch on the login process the account status will be checked in Latch and act conform the status, allowing or denying the access to the portal. If the account has one time password feature activated then a new validation page will be shown to enter the password sended to the user's mobile.
 
 <a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Pairing.png">
-<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Pairing.png" width="380px">
+<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Pairing.png" width="350px">
 </a>
 <a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/TwoFactor.png">
-<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/TwoFactor.png" width="380px">
+<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/TwoFactor.png" width="350px">
 </a>
