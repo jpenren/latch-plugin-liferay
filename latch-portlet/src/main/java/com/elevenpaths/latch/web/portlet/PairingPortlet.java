@@ -69,6 +69,7 @@ public class PairingPortlet extends MVCPortlet {
 		try {
 			long userId = PortalUtil.getUser(request).getUserId();
 			LatchService.doUnPair(userId);
+			SessionMessages.add(request, "success");
 		} catch (Exception e) {
 			SessionMessages.add(request, "error");
 		} 
