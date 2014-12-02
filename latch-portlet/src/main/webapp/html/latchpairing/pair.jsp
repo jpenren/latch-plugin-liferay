@@ -12,7 +12,7 @@
 		</div>
 		<div class="span6 pairing-form__content_fields">
 			<div>
-				<input class="field pairing-form__content__fields__token" name="<portlet:namespace/>token-value" maxlength="6" placeholder="Your code" />
+				<input class="field pairing-form__content__fields__token" name="<portlet:namespace/>token-value" maxlength="6" placeholder="<liferay-ui:message key="latch.pairing.placeholder" />" />
 	    		<aui:button type="submit" cssClass="pairing-form__content__fields__send" value="latch.button.pair"></aui:button>
 			</div>
 	    </div>
