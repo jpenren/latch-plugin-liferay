@@ -1,6 +1,6 @@
 #Liferay Latch plugin
 
-With latch liferay plugin you can add a new security layer to your Liferay instances. Latch is a security system that let to your users configure your own security mechanism and use their mobile phone as second factor security. Latch plugin is simple to configure and use, is not intrusive, only adds a new security layer without any modifying in your base installation, it can be disabled or removed without any problem.
+With latch liferay plugin you can add a new security layer to your Liferay instances. [Latch](https://latch.elevenpaths.com) is a security system that let to your users configure your own security mechanism and use their mobile phone as second factor security. Latch plugin is simple to configure and use, is not intrusive, only adds a new security layer without any modifying in your base installation, it can be disabled or removed without any problem.
 
 Latch plugin supports all security mode available in Latch service. These security modes are configurable per every user:
 - **Lock/Unlock**. Simplest mode that let to the user lock their account access from their mobile with a single click.
@@ -21,7 +21,7 @@ Latch plugin supports all security mode available in Latch service. These securi
 
 ##Prerequisites
 - Liferay 6.2 (testing 6.1)
-- Latch developer account. To configure the plugin do you needs to create an application in Latch developer area to get an application id and secret key. Also, in the application configuration page, you can configure if the OTP (one time password) is available.
+- Latch developer account. To configure the plugin do you needs to create an application in [Latch developer area](https://latch.elevenpaths.com/www/) to get an application id and secret key. Also, in the application configuration page, you can configure if the OTP (one time password) is available.
 
 ##Installing and configuring Latch plugin
 Soon the first version will be released.
@@ -42,8 +42,8 @@ Your portal is ready!
 After that, if an account is managed by Latch on the login process the account status will be checked in Latch and act conform the status, allowing or denying the access to the portal. If the account has one time password feature activated then a new validation page will be shown to enter the password sended to the user's mobile.
 
 <a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Pairing.png">
-<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Pairing.png" width="400px">
+<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Pairing.png" width="380px">
 </a>
 <a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/TwoFactor.png">
-<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/TwoFactor.png" width="400px">
+<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/TwoFactor.png" width="380px">
 </a>
