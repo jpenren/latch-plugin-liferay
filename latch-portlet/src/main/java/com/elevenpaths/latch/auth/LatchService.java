@@ -11,7 +11,6 @@ import com.elevenpaths.latch.api.response.PairResponse;
 import com.elevenpaths.latch.api.response.StatusResponse;
 import com.elevenpaths.latch.domain.UserLatch;
 import com.elevenpaths.latch.exception.LatchAuthenticationException;
-import com.elevenpaths.latch.exception.UserNotLatchedException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -46,12 +45,9 @@ public class LatchService {
 		} 
 	}
 	
-	public static StatusResponse authenticate(long userId) throws CommunicationException, UserNotLatchedException, LatchAuthenticationException {
+	public static StatusResponse authenticate(long userId) throws CommunicationException, LatchAuthenticationException {
 		try {
 			UserLatch userLatch = repo.findByUserId(userId);
-			if(userLatch==null){
-				throw new UserNotLatchedException();
-			}
 			
 			String appId = LatchConfig.getAppId();
 			String secretKey = LatchConfig.getSecretKey();

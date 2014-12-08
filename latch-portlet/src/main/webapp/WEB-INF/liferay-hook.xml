@@ -11,19 +11,34 @@
 			<param-name>latch-second-factor-url</param-name>
 			<param-value>/portal/security/latch/second-factor</param-value>
 		</init-param>
+		<init-param>
+			<param-name>latch-account-locked-url</param-name>
+			<param-value>/portal/security/latch/account-locked</param-value>
+		</init-param>
 	</servlet-filter>
 	<servlet-filter-mapping>
 		<servlet-filter-name>Latch Filter</servlet-filter-name>
-		<after-filter>Auto Login Filter</after-filter>
+		<after-filter>Secure Main Servlet Filter</after-filter>
+		<url-pattern>/c/*</url-pattern>
 		<url-pattern>/web/*</url-pattern>
 		<url-pattern>/group/*</url-pattern>
 		<url-pattern>/user/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
+		<url-pattern>/sharepoint/*</url-pattern>
+		<url-pattern>/documents/*</url-pattern>
+		<url-pattern>/widget/*</url-pattern>
+		<url-pattern>/api/*</url-pattern>
+		<url-pattern>/webdav/*</url-pattern>
+		<url-pattern>/xmlrpc/*</url-pattern>
 		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
 	</servlet-filter-mapping>
 	
 	<struts-action>
 		<struts-action-path>/portal/security/latch/second-factor</struts-action-path>
+		<struts-action-impl>com.elevenpaths.latch.web.action.LatchSecuredAreaAction</struts-action-impl>
+	</struts-action>
+	<struts-action>
+		<struts-action-path>/portal/security/latch/account-locked</struts-action-path>
 		<struts-action-impl>com.elevenpaths.latch.web.action.LatchSecuredAreaAction</struts-action-impl>
 	</struts-action>
 	

@@ -16,21 +16,26 @@ public class LatchSecuredAreaAction extends BaseStrutsAction {
 	private static final String LOGOUT_URL = PortalUtil.getPathMain()+"/portal/logout";
 	
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		final HttpSession session = request.getSession();
-		String token = (String) session.getAttribute(LatchKeys.SESSION_ACCOUNT_2_FACTOR);
-		final String input = request.getParameter("--token-value");
-		if(input!=null && input.equals(token)){
-			session.removeAttribute(LatchKeys.SESSION_ACCOUNT_2_FACTOR);
-			token=null;
-		}
-		
-		if(token==null){
-			//TODO configurable at portlet
-			response.sendRedirect("/"+PortalUtil.getPathContext());
-		}
-		
 		request.setAttribute("logoutUrl", LOGOUT_URL);
+		final HttpSession session = request.getSession();
+		boolean accountLocked = session.getAttribute(LatchKeys.SESSION_ACCOUNT_LOCKED)!=null;
 		
-		return "/latch/twoFactor.jsp";
+		if(accountLocked){
+			return "/latch/accountLocked.jsp";
+		}else{
+			String token = (String) session.getAttribute(LatchKeys.SESSION_ACCOUNT_2_FACTOR);
+			final String input = request.getParameter("--token-value");
+			if(input!=null && input.equals(token)){
+				session.removeAttribute(LatchKeys.SESSION_ACCOUNT_2_FACTOR);
+				token=null;
+			}
+			
+			if(token==null){
+				//TODO configurable at portlet
+				response.sendRedirect("/"+PortalUtil.getPathContext());
+			}
+			
+			return "/latch/twoFactor.jsp";
+		}
 	}
 }
