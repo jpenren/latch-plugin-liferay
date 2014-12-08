@@ -1,4 +1,4 @@
-#Liferay Latch plugin
+#Latch Plugin for Liferay
 
 With latch liferay plugin you can add a new security layer to your Liferay instances. [Latch](https://latch.elevenpaths.com) is a security system that let to your users configure your own security mechanism and use their mobile phone as second factor security. Latch plugin is simple to configure and use, is not intrusive, only adds a new security layer without any modifying in your base installation, it can be disabled or removed without any problem.
 
