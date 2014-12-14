@@ -28,8 +28,8 @@ Latch plugin supports all security mode available in Latch service. These securi
 To install the plugin, you only need to copy the .war package (downloaded from release tab) into the Liferay deploy directory.
 To configure the plugin you need to add the Latch Portlet to any page and access to the portlet configuration (engine icon) where you can specify the required parameters to integrate your portal with Latch.
 
-<a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Configuration.png">
-<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Configuration.png" width="400px">
+<a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Configuration.png?t=1">
+<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Configuration.png?t=1" width="400px">
 </a>
 
 Your portal is ready!
@@ -40,9 +40,9 @@ Your portal is ready!
 
 After that, if an account is managed by Latch on the login process the account status will be checked in Latch and act conform the status, allowing or denying the access to the portal. If the account has one time password feature activated then a new validation page will be shown to enter the password sended to the user's mobile.
 
-<a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Pairing.png">
-<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Pairing.png" width="350px">
+<a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Pairing.png?t=1">
+<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/Pairing.png?t=1" width="350px">
 </a>
-<a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/TwoFactor.png">
-<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/TwoFactor.png" width="350px">
+<a href="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/TwoFactor.png?t=1">
+<img src="https://raw.githubusercontent.com/jpenren/latch-plugin-liferay/master/src/site/doc/TwoFactor.png?t=1" width="350px">
 </a>
