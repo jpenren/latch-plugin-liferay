@@ -14,16 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.elevenpaths.latch.LatchConfig;
 import com.elevenpaths.latch.LatchKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PortalUtil;
 
+/**
+ * Check latch session values to restrict access to portal  
+ * @author jpenren
+ */
 public class LatchFilter implements Filter {
 	private static Log log = LogFactoryUtil.getLog(LatchFilter.class);
 	private String secondFactorUrl;
 	private String accountLockedUrl;
-	private Set<String> internalUrls = new HashSet<String>();
+	private final Set<String> internalUrls = new HashSet<String>();
 
 	public void init(FilterConfig config) throws ServletException {
 		secondFactorUrl = config.getInitParameter("latch-second-factor-url");
@@ -34,27 +39,24 @@ public class LatchFilter implements Filter {
 	}
 	
 	public void doFilter(ServletRequest sRequest, ServletResponse sResponse, FilterChain chain) throws IOException, ServletException {
-		boolean doChain = true;
 		if( sRequest instanceof HttpServletRequest ){
 			try {
-				final HttpServletRequest request = (HttpServletRequest) sRequest;
-				final HttpServletResponse response = (HttpServletResponse) sResponse;
-				final HttpSession session = request.getSession();
-				final String uri = request.getRequestURI();
+				HttpServletRequest request = (HttpServletRequest) sRequest;
+				HttpServletResponse response = (HttpServletResponse) sResponse;
+				HttpSession session = request.getSession(false);
+				String uri = request.getRequestURI();
 				
-				if( !isInternalUrl(uri) ){
+				if( session!=null && LatchConfig.isConfigured() && !isInternalUrl(uri) ){
 					//Checks if account is locked
-					final boolean accountLocked = session.getAttribute(LatchKeys.SESSION_ACCOUNT_LOCKED)!=null;
+					boolean accountLocked = session.getAttribute(LatchKeys.SESSION_ACCOUNT_LOCKED)!=null;
 					if( accountLocked ){
 						response.sendRedirect( getAccountLockedPath() );
-						doChain=false;
 					}
 					
-					//Check if has 2 factor
-					final boolean hasToken = session.getAttribute(LatchKeys.SESSION_ACCOUNT_2_FACTOR)!=null;
+					//Checks if has 2 factor
+					boolean hasToken = session.getAttribute(LatchKeys.SESSION_ACCOUNT_2_FACTOR)!=null;
 					if( hasToken ){
 						response.sendRedirect( get2FactorPath() );
-						doChain=false;
 					}
 				}
 			} catch (Exception e) {
@@ -62,9 +64,7 @@ public class LatchFilter implements Filter {
 			}
 		}
 		
-		if( doChain ){
-			chain.doFilter(sRequest, sResponse);
-		}
+		chain.doFilter(sRequest, sResponse);
 	}
 	
 	public void destroy() {
@@ -78,7 +78,7 @@ public class LatchFilter implements Filter {
 	 */
 	private boolean isInternalUrl(String uri){
 		for(String path : internalUrls){
-			if( uri.equals(path) ){
+			if( path.equals(uri) ){
 				return true;
 			}
 		}

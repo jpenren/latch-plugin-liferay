@@ -7,15 +7,12 @@ import static com.elevenpaths.latch.LatchKeys.SECRET_KEY;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 
 
 public final class LatchConfig {
 	private static final String CONFIG_FILE = "latch-config.properties";
-	private static Log log = LogFactoryUtil.getLog(LatchConfig.class);
 	private static PropertiesConfiguration config = new PropertiesConfiguration();
 	
 	static {
@@ -23,7 +20,7 @@ public final class LatchConfig {
 			final String path = getConfigPath();
 			config.load(path);
 		} catch (ConfigurationException e) {
-			log.error("Error loading configuration: ", e);
+			//TODO create file
 		}
 	}
 	
