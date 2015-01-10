@@ -19,7 +19,6 @@
 	<servlet-filter-mapping>
 		<servlet-filter-name>Latch Filter</servlet-filter-name>
 		<after-filter>Secure Main Servlet Filter</after-filter>
-		<url-pattern>/c/*</url-pattern>
 		<url-pattern>/web/*</url-pattern>
 		<url-pattern>/group/*</url-pattern>
 		<url-pattern>/user/*</url-pattern>
