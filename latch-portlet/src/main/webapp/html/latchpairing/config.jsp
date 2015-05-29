@@ -20,7 +20,7 @@
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
 	<aui:input name="preferences--appId--" cssClass="span5" label="latch.app.id" type="text" value="<%= appId %>" />
-	<aui:input name="preferences--secretKey--" cssClass="span5" label="latch.app.secret" type="text" value="<%= secretKey %>" />
+	<aui:input name="preferences--secretKey--" cssClass="span5" label="latch.app.secret" type="password" value="<%= secretKey %>" />
 	<aui:input name="preferences--forceLoginFail--" type="checkbox" label="latch.app.force.login.fail" value="<%= forceLoginFail %>" />
 	<small><liferay-ui:message key="latch.app.force.login.fail.info" /></small>
 	
