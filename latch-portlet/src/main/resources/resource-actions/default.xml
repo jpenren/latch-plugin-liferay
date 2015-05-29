@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<resource-action-mapping>
+	<portlet-resource>
+		<portlet-name>latch-pairing</portlet-name>
+		<permissions>
+			<supports>
+				<action-key>ADD_TO_PAGE</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<community-defaults>
+			</community-defaults>
+			<guest-defaults>
+			</guest-defaults>
+			<guest-unsupported>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>ADD_TO_PAGE</action-key>
+				<action-key>VIEW</action-key>
+			</guest-unsupported>
+			<site-member-defaults>
+                <action-key>VIEW</action-key>
+            </site-member-defaults>
+		</permissions>
+	</portlet-resource>
+</resource-action-mapping>

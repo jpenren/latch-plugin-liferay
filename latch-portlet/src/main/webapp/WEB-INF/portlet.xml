@@ -29,7 +29,7 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
-			<portlet-mode>config</portlet-mode>
+			<portlet-mode>configuration</portlet-mode>
 		</supports>
 		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
