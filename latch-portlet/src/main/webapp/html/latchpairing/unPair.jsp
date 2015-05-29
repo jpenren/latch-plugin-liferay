@@ -18,5 +18,5 @@
         <aui:button type="submit" value="latch.button.unpair"></aui:button>
     </aui:button-row>
     
-    <input type="text" name="<portlet:namespace /><%= LatchKeys.CSRF_TOKEN %>" value="<%= token %>">
+    <input type="hidden" name="<portlet:namespace /><%= LatchKeys.CSRF_TOKEN %>" value="<%= token %>">
 </aui:form>
