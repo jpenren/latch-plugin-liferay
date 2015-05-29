@@ -11,5 +11,6 @@ public final class LatchKeys {
 	public static final String FORCE_LOGIN_FAIL = "forceLoginFail";
 	public static final String SESSION_ACCOUNT_2_FACTOR = "--latch-security-account-2-factor--";
 	public static final String SESSION_ACCOUNT_LOCKED = "--latch-security-account-locked--";
+	public static final String CSRF_TOKEN ="csrf_token";
 	
 }

@@ -1,5 +1,7 @@
 package com.elevenpaths.latch.web.portlet;
 
+import static com.elevenpaths.latch.LatchKeys.CSRF_TOKEN;
+
 import java.io.IOException;
 
 import javax.portlet.ActionRequest;
@@ -43,6 +45,8 @@ public class PairingPortlet extends MVCPortlet {
 			if(user!=null){
 				boolean hasLatch = LatchService.hasLatch(user.getUserId());
 				view = (hasLatch ? unPairTemplate : pairTemplate);
+				
+				request.getPortletSession().setAttribute(CSRF_TOKEN, String.valueOf(System.currentTimeMillis()));
 			}
 		} catch (Exception e) {
 			log.error("Error loading Latch Portlet view: ", e);
@@ -65,7 +69,14 @@ public class PairingPortlet extends MVCPortlet {
 		} 
 	}
 	
-	public void doUnPair(ActionRequest request, ActionResponse response){
+	public void doUnPair(ActionRequest request, ActionResponse response) throws PortletException{
+		//Check csrf values from session and request match
+		String sessionCsrf = request.getPortletSession().getAttribute(CSRF_TOKEN).toString();
+		String requestCsrf = request.getParameter(CSRF_TOKEN);
+		if( !sessionCsrf.equals(requestCsrf) ){
+			throw new PortletException("CSRF values not match");
+		}
+		
 		try {
 			long userId = PortalUtil.getUser(request).getUserId();
 			LatchService.doUnPair(userId);
